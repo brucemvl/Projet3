@@ -1,5 +1,4 @@
 let articles = []
-let categories = []
 const travaux = document.querySelector(".gallery")
 const apiUrl = "http://localhost:5678/api/works"
 
@@ -96,42 +95,7 @@ for(let i=0; i<btnFiltre.length; i++){
 
   filtrage()
 
-
-
-
-  
-/*
-
-  // filtre appartements
-  const btnFiltreAppt = document.querySelector(".filtreappt")
-
-  btnFiltreAppt.addEventListener("click", function(){
-
-    const appt = articles.filter(function(projet){
-
-      return projet.category.name === "Appartements"
-
-    })
-    travaux.innerHTML = ""
-    genererImg(appt)
-
-  })
-
-  // filtre hotels et resturants
-
-  const btnFiltreHotel = document.querySelector(".filtrehotels")
-
-  btnFiltreHotel.addEventListener("click", function(){
-    const hotels = articles.filter(function(projet){
-      return projet.category.name === "Hotels & restaurants"
-    })
-
-    travaux.innerHTML = ""
-    genererImg(hotels)
-  })*/
-
-  //filtre tous
-
+//Filtre Tous
   const btnFiltreTous = document.querySelector(".tous")
   
   btnFiltreTous.addEventListener("click", function(){
