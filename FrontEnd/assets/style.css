@@ -258,6 +258,22 @@ input[type="submit"]{
 	text-align: center;
 }
 
+.emailerreur {
+	display: flex;
+    justify-content: center;
+    margin: 10px;
+    color: red;
+    font-weight: 900;
+}
+
+.mdperreur {
+	display: flex;
+    justify-content: center;
+    margin: 10px;
+    color: red;
+    font-weight: 900;
+}
+
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
