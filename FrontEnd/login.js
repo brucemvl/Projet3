@@ -3,15 +3,11 @@ let motDePasse = document.getElementById("password")
 let msgErreurMail = document.querySelector(".emailerreur")
 let msgErreurMdp = document.querySelector(".mdperreur")
 
+
 let valider = document.querySelector(".valider")
+let formulaire = document.getElementById("formulaireConnexion")
 
-let apiLoginUrl = "http://localhost:5678/api/users/login"
 
-fetch(apiLoginUrl, {
-    method: "POST",
-    body: `"{"${mail.value}": "${motDePasse.value}"}"`,
-    headers: "accept: application.json"
-})
 
 function erreur(champ, msg){
     if(champ.value.length < 1){
@@ -35,12 +31,30 @@ function validerMail(adressemail) {
 
 
 
-valider.addEventListener("click", ()=>{
-    
-    erreur(mail, msgErreurMail)
-    msgErreurMdp.innerHTML = ""
-    erreur(motDePasse, msgErreurMdp)
+valider.addEventListener("click", function(){
+   
+    let utilisateur = {
+        user : mail.value,
+        password : motDePasse.value
+    }
+    const chargeUtile = JSON.stringify(utilisateur)
 
-    validerMail(mail.value)
+    let apiLoginUrl = "http://localhost:5678/api/users/login"
+
+fetch(apiLoginUrl, {
+    method: "POST",
+    body: chargeUtile,
+    headers: {"Content-Type": "application.json"}
+})
+.catch(function(error){
+    console.log(error)
+  })
+    
+  erreur(mail, msgErreurMail)
+  msgErreurMdp.innerHTML = ""
+  erreur(motDePasse, msgErreurMdp)
+
+  validerMail(mail.value)
+   
 
 })
