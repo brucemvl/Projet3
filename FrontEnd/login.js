@@ -57,8 +57,13 @@ formulaire.addEventListener("submit", function(event){
    
     
     .then((response)=> response.json())
-    .then(data => console.log(data))
+    .then(function(data){
+        const token = JSON.stringify(data.token)
+        window.localStorage.setItem("token", token)
+        window.location.href = "index.html"
+    })
 
+    
     
   erreur(mail, msgErreurMail)
   msgErreurMdp.innerHTML = ""
