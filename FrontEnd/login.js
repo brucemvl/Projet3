@@ -4,7 +4,6 @@ let msgErreurMail = document.querySelector(".emailerreur")
 let msgErreurMdp = document.querySelector(".mdperreur")
 
 
-let valider = document.querySelector(".valider")
 let formulaire = document.getElementById("formulaireConnexion")
 
 
@@ -31,24 +30,35 @@ function validerMail(adressemail) {
 
 
 
-valider.addEventListener("click", function(){
-   
+formulaire.addEventListener("submit", function(event){
+    
+    event.preventDefault()
     let utilisateur = {
-        user : mail.value,
+        email : mail.value,
         password : motDePasse.value
     }
     const chargeUtile = JSON.stringify(utilisateur)
 
     let apiLoginUrl = "http://localhost:5678/api/users/login"
 
-fetch(apiLoginUrl, {
-    method: "POST",
-    body: chargeUtile,
-    headers: {"Content-Type": "application.json"}
-})
-.catch(function(error){
-    console.log(error)
-  })
+    fetch(apiLoginUrl , {
+        method: "POST",
+        body: chargeUtile,
+       headers: {"Content-Type":"application/json"}
+    })
+    /*.then(function(response) {
+        if (response.status === 401){
+            console.log("erreeeeeur")
+        }
+        else {
+            (response => response.json())
+        }
+    })*/
+   
+    
+    .then((response)=> response.json())
+    .then(data => console.log(data))
+
     
   erreur(mail, msgErreurMail)
   msgErreurMdp.innerHTML = ""
