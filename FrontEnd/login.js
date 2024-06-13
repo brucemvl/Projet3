@@ -2,11 +2,7 @@ let mail = document.getElementById("email")
 let motDePasse = document.getElementById("password")
 let msgErreurMail = document.querySelector(".emailerreur")
 let msgErreurMdp = document.querySelector(".mdperreur")
-
-
 let formulaire = document.getElementById("formulaireConnexion")
-
-
 
 function erreur(champ, msg){
     if(champ.value.length < 1){
@@ -28,8 +24,6 @@ function validerMail(adressemail) {
     }
     }
 
-
-
 formulaire.addEventListener("submit", function(event){
     
     event.preventDefault()
@@ -43,33 +37,29 @@ formulaire.addEventListener("submit", function(event){
 
     fetch(apiLoginUrl , {
         method: "POST",
-        body: chargeUtile,
-       headers: {"Content-Type":"application/json"}
+        body: chargeUtile,  
+        headers: {"Content-Type":"application/json"}
     })
-    /*.then(function(response) {
-        if (response.status === 401){
-            console.log("erreeeeeur")
+    .then( response => {
+        if( response.status === 200) {
+            return response.json()
+        } else if( response === 401 ) {
+            return alert("Non autorisé")
+        } else if (response === 404 ) {
+            return alert("Utilisateur introuvable")
         }
-        else {
-            (response => response.json())
-        }
-    })*/
-   
-    
-    .then((response)=> response.json())
-    .then(function(data){
+    })
+    .then(data => {
         const token = JSON.stringify(data.token)
         window.localStorage.setItem("token", token)
-        window.location.href = "index.html"
+        window.location.href = 'index.html';
     })
+    .catch(error => {
+        console.error(error);
+    });
 
-    
-    
   erreur(mail, msgErreurMail)
   msgErreurMdp.innerHTML = ""
   erreur(motDePasse, msgErreurMdp)
-
   validerMail(mail.value)
-   
-
 })

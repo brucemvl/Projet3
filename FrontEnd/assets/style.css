@@ -286,3 +286,21 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+
+.arti {
+	opacity: 1;
+	transition: opacity .5s ease;
+} 
+
+.fade-out {
+	animation: fadeout .5s ease-in-out;
+}
+
+@keyframes fadeout {
+	0%{
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	} 
+}

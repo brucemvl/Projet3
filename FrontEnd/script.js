@@ -1,27 +1,34 @@
-let articles = []
 const travaux = document.querySelector(".gallery")
+const filtres = document.querySelector(".filtres")
 const apiUrl = "http://localhost:5678/api/works"
+const apiCategories = "http://localhost:5678/api/categories"
 
 fetch(apiUrl)
   .then((response) => response.json())
-  .then(function(data) {
-    articles = data;
-    genererImg(articles);
-})
-.catch(function(error){
-  console.log(error)
-})
+  .then(function (data) {
+    genererImg(data);
+  })
+  .catch(function (error) {
+    console.log(error)
+  })
+
+fetch(apiCategories)
+  .then((response) => response.json())
+  .then(function (data) {
+    generateFilters(data)
+  })
+  .catch(function (error) {
+    console.log(error)
+  })
 
 
-
-
-
-function genererImg(articles){
-
-  for(let i=0; i<articles.length; i++){
+function genererImg(articles) {
+  for (let i = 0; i < articles.length; i++) {
 
     const article = document.createElement("article")
     article.classList.add("arti")
+    article.dataset.category = articles[i].category.name
+    article.setAttribute('id', articles[i].category.id)
 
     const imgArticle = document.createElement("img")
     imgArticle.src = articles[i].imageUrl
@@ -29,76 +36,47 @@ function genererImg(articles){
     const nomArticle = document.createElement("p")
     nomArticle.innerText = articles[i].title
 
-
     travaux.appendChild(article)
     article.appendChild(imgArticle)
     article.appendChild(nomArticle)
   }
-
 }
 
+function generateFilters(categories) {
+  categories.forEach(category => {
+    const menuFiltreItem = document.createElement("li")
+    menuFiltreItem.innerText = category.name
+    menuFiltreItem.dataset.categoryId = category.id
+    menuFiltreItem.dataset.category = category.name
 
-/*for (let i=0; i=categories.length; i++){
-categories = document.querySelectorAll("section ul")
-categories.forEach((category)=>{
-  category.addEventListener("click", filtrage(category){
-category = categories[i].textContent
+    filtres.appendChild(menuFiltreItem)
+    filtrage(menuFiltreItem)
   })
-})
-}
-
-function categoryz(articles){
-  for(let i=0; i<articles.length;i++){
-    return articles[i].category.name
-  }
 }
 
 function filtrage(filtre) {
-  let projets = articles.filter(function (projet) {
-    return projet.category.name === filtre
-  });
-  travaux.innerHTML = "";
-  genererImg(projets);
-  
+    const articles = document.querySelectorAll('.arti');
+
+    filtre.addEventListener("click", function () {
+      const category = filtre.dataset.category;
+
+      articles.forEach(article => {
+        if( article.dataset.category !== category) {
+          article.style.display = 'none';
+          article.classList.add('fade-out')
+          setTimeout(() => {
+            article.style.display = "none";
+            article.classList.remove("fade-out");
+          }, 500);
+        } else {
+          article.style.display = 'block';
+          setTimeout(() => {
+            article.classList.remove("fade-out");
+          }, 0);
+        }
+      });
+    });
 }
-
-let obj = "Objets"*/
-
+// filtre tout qui fait display block avec le remove fade-out sur tout les articles
 
 
-
-function filtrage(){
-  let btnFiltre = document.querySelectorAll(".filtres li")
-for(let i=0; i<btnFiltre.length; i++){
-  let categ =btnFiltre[i].textContent
-
-
-  
-
-  btnFiltre[i].addEventListener("click", function(){
-    const projetsFiltres = articles.filter(function(projet){
-      return projet.category.name === categ
-    })
-    const projetsNonFiltres = articles.filter(function(projet){
-      return projet.category.name !== categ
-      
-    })
-   
-    travaux.innerHTML = ""
-    genererImg(projetsFiltres)
-
-  
-  
-  })
-}
-  }
-
-  filtrage()
-
-//Filtre Tous
-  const btnFiltreTous = document.querySelector(".tous")
-  
-  btnFiltreTous.addEventListener("click", function(){
-    travaux.innerHTML = ""
-    genererImg(articles)
-  })
