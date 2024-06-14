@@ -80,3 +80,34 @@ function filtrage(filtre) {
 // filtre tout qui fait display block avec le remove fade-out sur tout les articles
 
 
+// partie administrateur
+
+const userToken = window.localStorage.getItem("token")
+console.log(userToken)
+
+const menu = document.querySelector(".menu")
+const btnLogin = document.querySelector(".btnLogin")
+const btnLogout = document.querySelector(".btnLogout")
+const modeEdition = document.querySelector(".modeEdition")
+
+
+
+function homepageEdit(){
+  if(userToken !== null){
+filtres.style.display = "none"
+btnLogin.style.display = "none"
+
+btnLogout.addEventListener("click", ()=>{
+  localStorage.clear()
+  window.location.href = "index.html"
+})
+  
+
+  }
+  else {
+    btnLogout.style.display = "none"
+    modeEdition.style.display = "none"
+  }
+}
+homepageEdit()
+

@@ -11,14 +11,16 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<script type="module" src="script.js" defer></script>
 </head>
+<div class="modeEdition"><img src="./assets/icons/editionpen.png"></div>
 <body>
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
-			<ul>
+			<ul class="menu">
 				<li>projets</li>
 				<li>contact</li>
-				<li><a href="login.html">login</a></li>
+				<li><a href="login.html" class="btnLogin">login</a></li>
+				<li class="btnLogout">logout</li>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -36,7 +38,10 @@
 			</article>
 		</section>
 		<section id="portfolio">
+			<div class="titreprojets">
 			<h2>Mes Projets</h2>
+			<p><i class="fa-regular fa-pen-to-square"></i>Modifier</p>
+			</div>
 			<nav>
 				<ul class="filtres">
 					<li class="tous">Tous</li>
