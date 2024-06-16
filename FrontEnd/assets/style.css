@@ -29,6 +29,9 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+html {
+	max-width: 1440px;
+}
 
 body {
 	line-height: 1;
@@ -108,7 +111,20 @@ h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: #1D6154;
+}
+span {
+	font-size: 12px;
+	position: relative;
+    left: 20px;	
+}
+
+span:hover {
+	cursor: pointer;
+}
+
+i {
+	margin-right: 5px;
 }
 nav ul {
 	display: flex;
@@ -326,5 +342,53 @@ footer nav ul {
 	100% {
 		opacity: 0;
 	} 
+}
+
+.fenetremodale {
+    display: none;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.fenetremodale.active {
+	position: inherit;
+}
+
+.contenumodale {
+    position: absolute;
+    top: 660px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 630px;
+	height: 680px;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-size: 17px;
+    font-weight: 500;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.contenumodale i {
+	color: black;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    bottom: 20px;
+
+}
+
+.contenumodale i:hover {
+	cursor: pointer;
+}
+.active {
+    display: flex !important;
 }
 

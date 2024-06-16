@@ -89,11 +89,53 @@ const menu = document.querySelector(".menu")
 const btnLogin = document.querySelector(".btnLogin")
 const btnLogout = document.querySelector(".btnLogout")
 const modeEdition = document.querySelector(".modeEdition")
+const modifier = document.querySelector(".modifier")
+
+function afficherModale() {
+  let popupBackground = document.querySelector(".fenetremodale")
+  // La popup est masquée par défaut (display:none), ajouter la classe "active"
+  // va changer son display et la rendre visible. 
+  popupBackground.classList.add("active")
+  body.style.blur()
+}
+
+/**
+* Cette fonction cache la popup pour partager son score. 
+*/
+function cacherModale() {
+  let popupBackground = document.querySelector(".fenetremodale")
+
+  // La popup est masquée par défaut (display:none), supprimer la classe "active"
+  // va rétablir cet affichage par défaut. 
+  popupBackground.classList.remove("active")
+}
+
+
+/**
+* Cette fonction initialise les écouteurs d'événements qui concernent 
+* l'affichage de la popup. 
+*/
+function initAddEventListenerModale() {
+  let fermerModale = document.getElementById("close")
+
+  // On écoute le click sur le bouton "partager"
+  modifier.addEventListener("click", () => {
+    console.log("jai lik")
+      // Quand on a cliqué sur le bouton partagé, on affiche la popup
+      afficherModale()
+  })
+
+  // On écoute le click sur la div "popupBackground"
+  fermerModale.addEventListener("click", ()=>{
+    cacherModale()
+  })
+}
 
 
 
 function homepageEdit(){
   if(userToken !== null){
+    initAddEventListenerModale()
 filtres.style.display = "none"
 btnLogin.style.display = "none"
 
@@ -101,12 +143,16 @@ btnLogout.addEventListener("click", ()=>{
   localStorage.clear()
   window.location.href = "index.html"
 })
-  
+
+modifier.addEventListener("click", ()=>{
+  afficherModale()
+  })
 
   }
   else {
     btnLogout.style.display = "none"
     modeEdition.style.display = "none"
+    modifier.style.display = "none"
   }
 }
 homepageEdit()
