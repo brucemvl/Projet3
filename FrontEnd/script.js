@@ -138,6 +138,14 @@ for(let i=0; i<articles.length; i++){
     projetsModale.appendChild(projet)
     projet.appendChild(imageProjet)
     projet.appendChild(suppression)
+
+    suppression.addEventListener("click", ()=>{
+      const id = i+1
+      fetch("http://localhost:5678/api/works/" + id ,{
+        method: "DELETE",
+        headers: {"Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxODU4NTE5MSwiZXhwIjoxNzE4NjcxNTkxfQ.Wk5r7vjo0QnV73uvA4jRqm7BQ7Rnmz1HMy9JDEkAv5E"}
+      })
+    })
     
 }
 
