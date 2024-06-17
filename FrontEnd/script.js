@@ -132,13 +132,12 @@ for(let i=0; i<articles.length; i++){
     const imageProjet = document.createElement("img");
     imageProjet.src = articles[i].imageUrl;
 
-    const supression = document.createElement("img")
-    supression.src = "assets/icons/trash.png"
-    console.log(supression.src)
+    const suppression = document.createElement("i")
+    suppression.classList.add("fa-solid", "fa-trash-can")
 
     projetsModale.appendChild(projet)
     projet.appendChild(imageProjet)
-    projet.appendChild(supression)
+    projet.appendChild(suppression)
     
 }
 
