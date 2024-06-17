@@ -357,15 +357,16 @@ footer nav ul {
 }
 
 .contenumodale {
-    position: absolute;
-    top: 660px;
+	position: absolute;
+    display: flex;
+    top: 760px;
     left: 50%;
     transform: translate(-50%, -50%);
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 630px;
-	height: 680px;
+    height: 680px;
     padding: 20px;
     text-align: center;
     color: white;
@@ -374,20 +375,72 @@ footer nav ul {
     background-color: #FFFFFF;
     border-radius: 10px;
     z-index: 1;
+    flex-direction: column;
+    align-content: center;
 }
 
-.contenumodale i {
+.fenetremodale i {
 	color: black;
     display: flex;
-    justify-content: flex-end;
     position: relative;
-    bottom: 20px;
-
+	left: 290px;
 }
 
-.contenumodale i:hover {
+i:hover {
 	cursor: pointer;
 }
+.contenumodale h2 {
+	font-family: inherit;
+	font-weight: 400;
+}
+
+.titremodale {
+	display: flex;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.fermeturemodale {
+	position: relative;
+    top: 20px;
+    right: 10px;
+}
+
+.projetsmodale {
+	border-bottom: solid 1px #B3B3B3;
+    width: 400px;
+    height: 350px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+	margin-bottom: 30px;
+	padding-bottom: 50px;
+}
+
+.projetsmodale article {
+	width: 75px;
+	height: 100px;
+}
+
+.projetsmodale img {
+	width: 100%;
+	height: 100%;
+}
+
+.contenumodale button {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px;
+	height: 35px;
+}
+
 .active {
     display: flex !important;
 }

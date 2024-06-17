@@ -80,7 +80,7 @@ function filtrage(filtre) {
 // filtre tout qui fait display block avec le remove fade-out sur tout les articles
 
 
-// partie administrateur
+// PARTIE ADMINISTRATEUR
 
 const userToken = window.localStorage.getItem("token")
 console.log(userToken)
@@ -91,45 +91,60 @@ const btnLogout = document.querySelector(".btnLogout")
 const modeEdition = document.querySelector(".modeEdition")
 const modifier = document.querySelector(".modifier")
 
+const reponse = await fetch("http://localhost:5678/api/works");
+const articles = await reponse.json();
+
+
+
+// GESTION DE LA MODALE
+
 function afficherModale() {
-  let popupBackground = document.querySelector(".fenetremodale")
-  // La popup est masquée par défaut (display:none), ajouter la classe "active"
-  // va changer son display et la rendre visible. 
-  popupBackground.classList.add("active")
-  body.style.blur()
+  let modale = document.querySelector(".fenetremodale")
+  
+  modale.classList.add("active")
 }
 
-/**
-* Cette fonction cache la popup pour partager son score. 
-*/
 function cacherModale() {
-  let popupBackground = document.querySelector(".fenetremodale")
+  let modale = document.querySelector(".fenetremodale")
 
-  // La popup est masquée par défaut (display:none), supprimer la classe "active"
-  // va rétablir cet affichage par défaut. 
-  popupBackground.classList.remove("active")
+  modale.classList.remove("active")
 }
 
 
-/**
-* Cette fonction initialise les écouteurs d'événements qui concernent 
-* l'affichage de la popup. 
-*/
 function initAddEventListenerModale() {
+  
   let fermerModale = document.getElementById("close")
 
-  // On écoute le click sur le bouton "partager"
   modifier.addEventListener("click", () => {
-    console.log("jai lik")
-      // Quand on a cliqué sur le bouton partagé, on affiche la popup
       afficherModale()
   })
 
-  // On écoute le click sur la div "popupBackground"
   fermerModale.addEventListener("click", ()=>{
     cacherModale()
   })
+  
 }
+
+function genererImgModale(articles){
+for(let i=0; i<articles.length; i++){
+  const projetsModale = document.querySelector(".projetsmodale")
+  const projet = document.createElement("article");
+    const imageProjet = document.createElement("img");
+    imageProjet.src = articles[i].imageUrl;
+
+    const supression = document.createElement("img")
+    supression.src = "assets/icons/trash.png"
+    console.log(supression.src)
+
+    projetsModale.appendChild(projet)
+    projet.appendChild(imageProjet)
+    projet.appendChild(supression)
+    
+}
+
+}
+
+genererImgModale(articles)
 
 
 
