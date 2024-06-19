@@ -123,8 +123,6 @@ span:hover {
 	cursor: pointer;
 }
 
-i {
-}
 nav ul {
 	display: flex;
 	align-items: center;
@@ -351,9 +349,10 @@ footer nav ul {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-.fenetremodale.active {
+/*.fenetremodale.active {
 	position: inherit;
-}
+	display: flex;
+}*/
 
 .contenumodale {
 	position: absolute;
@@ -381,8 +380,8 @@ footer nav ul {
 #close {
 	color: black;
     display: flex;
-    position: relative;
-	left: 290px;
+	position: relative;
+	left: 280px;
 }
 
 i:hover {
@@ -402,9 +401,8 @@ i:hover {
 }
 
 .fermeturemodale {
-	position: relative;
-    top: 20px;
-    right: 10px;
+	display: flex;
+	margin-top: 15px;
 }
 
 .projetsmodale {
@@ -456,7 +454,19 @@ i:hover {
     height: 10px;
     width: 10px;
 }
+
+button:hover {
+	cursor: pointer;
+}
+
+.fa-arrow-left {
+	color: black;
+    position: relative;
+    right: 270px;
+}
 .active {
     display: flex !important;
+	position: inherit;
+
 }
 

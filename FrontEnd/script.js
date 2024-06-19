@@ -98,9 +98,9 @@ function homepageEdit(){
   if(userToken !== null){
     initAddEventListenerModale()
 filtres.style.display = "none"
-btnLogin.style.display = "none"
+btnLogin.innerText = "logout"
 
-btnLogout.addEventListener("click", ()=>{
+btnLogin.addEventListener("click", ()=>{
   window.localStorage.removeItem("token")
   window.location.href = "index.html"
 })
@@ -108,12 +108,12 @@ btnLogout.addEventListener("click", ()=>{
 modifier.addEventListener("click", ()=>{
   afficherModale()
   })
-  genererImgModale(articles)
+  utilisationModale(articles)
 
 
   }
   else {
-    btnLogout.style.display = "none"
+    btnLogin.innerText = "login"
     modeEdition.style.display = "none"
     modifier.style.display = "none"
     console.log("no token")
@@ -125,6 +125,7 @@ homepageEdit()
 
 
 // GESTION DE LA MODALE
+
 
 function afficherModale() {
   let modale = document.querySelector(".fenetremodale")
@@ -138,9 +139,8 @@ function cacherModale() {
   modale.classList.remove("active")
 }
 
-
 function initAddEventListenerModale() {
-  
+  let modale = document.querySelector(".fenetremodale")
   let fermerModale = document.getElementById("close")
 
   modifier.addEventListener("click", () => {
@@ -150,38 +150,69 @@ function initAddEventListenerModale() {
   fermerModale.addEventListener("click", ()=>{
     cacherModale()
   })
+
+  modale.addEventListener("click", (event) => {
+
+    if (event.target === modale) {
+        cacherModale()
+    }
+})
   
 }
 
-function genererImgModale(articles){
-for(let i=0; i<articles.length; i++){
+function partieSuppression(){
   const projetsModale = document.querySelector(".projetsmodale")
+  const titreModale = document.querySelector(".title")
+
+  titreModale.innerText = "Galerie photo"
+
+  for(let i=0; i<articles.length; i++){
+
+  const precedent = document.querySelector(".fa-arrow-left")
   const projet = document.createElement("article");
-    const imageProjet = document.createElement("img");
-    imageProjet.src = articles[i].imageUrl;
-    const id = articles[i].id
+  const imageProjet = document.createElement("img");
+  imageProjet.src = articles[i].imageUrl;
+  const id = articles[i].id
+  const suppression = document.createElement("i")
+  suppression.classList.add("fa-solid", "fa-trash-can")
 
-    const suppression = document.createElement("i")
-    suppression.classList.add("fa-solid", "fa-trash-can")
+  projetsModale.appendChild(projet)
+  projet.appendChild(imageProjet)
+  projet.appendChild(suppression)
 
-    projetsModale.appendChild(projet)
-    projet.appendChild(imageProjet)
-    projet.appendChild(suppression)
-
-    suppression.addEventListener("click", ()=>{
+  suppression.addEventListener("click", ()=>{
       
-     
       fetch("http://localhost:5678/api/works/" + id ,{
         method: "DELETE",
         headers: {"Authorization" : "Bearer " + userToken}
       })
     
     })
-    
+
+  precedent.style.display = "none"
 }
 
 }
 
+function partieAjout(){
+  const projetsModale = document.querySelector(".projetsmodale")
+  const precedent = document.querySelector(".fa-arrow-left")
+  const titreModale = document.querySelector(".title")
+
+
+  projetsModale.innerHTML = ""
+  titreModale.innerText = "Ajout photo"
+  precedent.style.display = "block"
+  precedent.addEventListener("click", partieSuppression)
+}
+
+function utilisationModale(articles){
+  partieSuppression(articles)
+  const btnAjoutModale = document.querySelector(".btnmodale")
+  
+  btnAjoutModale.addEventListener("click", partieAjout)
+
+}
 
 
 
