@@ -50,9 +50,10 @@ formulaire.addEventListener("submit", function(event){
         }
     })
     .then(data => {
-        const token = JSON.stringify(data.token)
+        const token = data.token
         window.localStorage.setItem("token", token)
         window.location.href = 'index.html';
+        console.log(token)
     })
     .catch(error => {
         console.error(error);

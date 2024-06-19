@@ -94,6 +94,34 @@ const modifier = document.querySelector(".modifier")
 const reponse = await fetch("http://localhost:5678/api/works");
 const articles = await reponse.json();
 
+function homepageEdit(){
+  if(userToken !== null){
+    initAddEventListenerModale()
+filtres.style.display = "none"
+btnLogin.style.display = "none"
+
+btnLogout.addEventListener("click", ()=>{
+  window.localStorage.removeItem("token")
+  window.location.href = "index.html"
+})
+
+modifier.addEventListener("click", ()=>{
+  afficherModale()
+  })
+  genererImgModale(articles)
+
+
+  }
+  else {
+    btnLogout.style.display = "none"
+    modeEdition.style.display = "none"
+    modifier.style.display = "none"
+    console.log("no token")
+  }
+}
+homepageEdit()
+
+
 
 
 // GESTION DE LA MODALE
@@ -131,6 +159,7 @@ for(let i=0; i<articles.length; i++){
   const projet = document.createElement("article");
     const imageProjet = document.createElement("img");
     imageProjet.src = articles[i].imageUrl;
+    const id = articles[i].id
 
     const suppression = document.createElement("i")
     suppression.classList.add("fa-solid", "fa-trash-can")
@@ -140,42 +169,21 @@ for(let i=0; i<articles.length; i++){
     projet.appendChild(suppression)
 
     suppression.addEventListener("click", ()=>{
-      const id = i+1
+      
+     
       fetch("http://localhost:5678/api/works/" + id ,{
         method: "DELETE",
-        headers: {"Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxODU4NTE5MSwiZXhwIjoxNzE4NjcxNTkxfQ.Wk5r7vjo0QnV73uvA4jRqm7BQ7Rnmz1HMy9JDEkAv5E"}
+        headers: {"Authorization" : "Bearer " + userToken}
       })
+    
     })
     
 }
 
 }
 
-genererImgModale(articles)
 
 
 
-function homepageEdit(){
-  if(userToken !== null){
-    initAddEventListenerModale()
-filtres.style.display = "none"
-btnLogin.style.display = "none"
 
-btnLogout.addEventListener("click", ()=>{
-  localStorage.clear()
-  window.location.href = "index.html"
-})
-
-modifier.addEventListener("click", ()=>{
-  afficherModale()
-  })
-
-  }
-  else {
-    btnLogout.style.display = "none"
-    modeEdition.style.display = "none"
-    modifier.style.display = "none"
-  }
-}
-homepageEdit()
 
