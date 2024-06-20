@@ -59,18 +59,24 @@ table {
 
 /** end reset css**/
 body {
-	max-width: 1140px;
-	margin:auto;
+	
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+}
+.blocpage {
+	max-width: 1140px;
+	margin:auto;
 }
 
 .modeEdition {
 	height: 30px;
-    width: 100%;
+    width: 1440px;
     display: flex;
     justify-content: center;
-	background-color: black;
+    background-color: black;
+    color: white;
+    align-items: center;
+	gap: 10px;
 }
 
 header {
@@ -197,6 +203,10 @@ li:hover {
 	}
 }
 
+.modifier:hover {
+	color: #B1663C;
+
+}
 
 
 #portfolio h2 {
@@ -295,6 +305,18 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	transition-duration: 500ms;
+	&&:hover {
+		background-color: #B1663C;
+		cursor: pointer;
+	}
+}
+.connexion {
+	transition-duration: 500ms;
+}
+.connexion:hover {
+	cursor: pointer;
+	background-color: #B1663C;
 }
 
 #login p {
@@ -457,6 +479,7 @@ i:hover {
 
 button:hover {
 	cursor: pointer;
+	background-color: #B1663C;
 }
 
 .fa-arrow-left {
@@ -467,6 +490,6 @@ button:hover {
 .active {
     display: flex !important;
 	position: inherit;
-
 }
+
 
