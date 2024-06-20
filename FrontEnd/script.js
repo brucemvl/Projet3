@@ -126,11 +126,15 @@ homepageEdit()
 
 // GESTION DE LA MODALE
 
+const ajout = document.querySelector(".ajout")
+ajout.style.display = "none"
+
 
 function afficherModale() {
   let modale = document.querySelector(".fenetremodale")
   
   modale.classList.add("active")
+
 }
 
 function cacherModale() {
@@ -143,6 +147,7 @@ function initAddEventListenerModale() {
   let modale = document.querySelector(".fenetremodale")
   let fermerModale = document.getElementById("close")
 
+
   modifier.addEventListener("click", () => {
       afficherModale()
   })
@@ -151,13 +156,11 @@ function initAddEventListenerModale() {
     cacherModale()
   })
 
-  modale.addEventListener("click", (event) => {
-
-    if (event.target === modale) {
-        cacherModale()
-    }
-})
-  
+  window.addEventListener("click", (e)=>{
+    if(e.target === modale)
+      cacherModale()
+    
+  })
 }
 
 function partieSuppression(){
@@ -203,6 +206,8 @@ function partieAjout(){
   projetsModale.innerHTML = ""
   titreModale.innerText = "Ajout photo"
   precedent.style.display = "block"
+projetsModale.appendChild(ajout)
+ajout.style.display = "block"
   precedent.addEventListener("click", partieSuppression)
 }
 
@@ -213,8 +218,3 @@ function utilisationModale(articles){
   btnAjoutModale.addEventListener("click", partieAjout)
 
 }
-
-
-
-
-

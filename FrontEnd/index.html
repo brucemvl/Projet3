@@ -14,7 +14,6 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script type="module" src="script.js" defer></script>
 </head>
 <body>
 	<div class="modeEdition"><i class="fa-regular fa-pen-to-square"></i><p>Mode édition</p></div>
@@ -79,7 +78,7 @@
 	</footer>
 
 	<div class="fenetremodale">
-		
+		<div class="overlay"></div>
         <div class="contenumodale">
 			<div class="fermeturemodale">
 				<i class="fa-solid fa-arrow-left"></i>
@@ -89,7 +88,15 @@
             <h2 class="title">Galerie Photo</h2>
 				</div>
 				<div class="projetsmodale">
-
+					<div class="ajout">
+						<div class="ajoutphoto">
+							<img src="assets/icons/picture.png">
+							<button>+ Ajouter photo</button>
+							<p>jpg, png : 4mo max</p>
+						</div>
+					<form>
+					</form>
+					</div>
 				</div>
 				<div class="btnmodale">
 					<button>Ajouter une photo</button>
@@ -98,5 +105,7 @@
 		</div>
     </div>
 </div>
+<script type="module" src="script.js" defer></script>
+
 	</body>
 	</html>
