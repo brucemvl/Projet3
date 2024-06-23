@@ -119,7 +119,7 @@ h2{
 	font-size: 30px;
 	color: #1D6154;
 }
-span {
+.titreprojets span {
 	font-size: 12px;
 	position: relative;
     left: 20px;	
@@ -462,6 +462,7 @@ i:hover {
 	text-align: center;
 	border-radius: 60px;
 	height: 35px;
+	transition-duration: 500ms;
 }
 
 .suppression {
@@ -517,6 +518,7 @@ border-radius: 3px;
 	background-color: #CBD6DC;
 	color: #306685;
 	border: 0;
+	transition-duration: 500ms;
 }
 
 .contenumodale form {
@@ -544,4 +546,31 @@ border-radius: 3px;
     display: flex;
     padding-left: 5px;
     font-family: sans-serif;
+}
+
+input[type=file] {
+	display: none;
+}
+
+label span {
+	font-family: 'Syne';
+    font-weight: 700;
+    color: #306685;
+    background-color: #CBD6DC;
+    margin: 2em auto;
+    width: 180px;
+    text-align: center;
+    border-radius: 60px;
+    height: 35px;
+    transition-duration: 500ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	transition-duration: 500ms;
+}
+
+
+label span:hover {
+	background-color: #1D6154;
+	color: white;
 }

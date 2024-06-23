@@ -171,6 +171,8 @@ ajout.style.display = "none"
   precedent.style.display = "none"
   btnAjoutModale.innerText = "Ajouter une photo"
   btnAjoutModale.addEventListener("click", partieAjout)
+  btnAjoutModale.disabled = false
+  btnAjoutModale.style.opacity = "1"
 
 
 
