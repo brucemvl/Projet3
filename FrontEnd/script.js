@@ -218,13 +218,19 @@ ajout.style.display = "flex"
 
   const champTitre = document.getElementById("title")
   const champCategorie = document.getElementById("cat")
-    
-  if(champTitre.value.length < 1){
-    btnAjoutModale.disabled = true
-  }
-  else {
-    btnAjoutModale.disabled = false
-    console.log("ca marche")
-  }
+  
+  btnAjoutModale.style.opacity = "0.5"
+  btnAjoutModale.disabled = true
+
+
+  champTitre.addEventListener("change", ()=>{
+
+    if (champTitre.value.length >= 1){
+      console.log("yes")
+      btnAjoutModale.style.opacity = "1"
+      btnAjoutModale.disabled = false
+      
+    }
+  })
   
 }

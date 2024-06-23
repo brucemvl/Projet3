@@ -538,3 +538,10 @@ border-radius: 3px;
 	box-shadow: 0px 4px 14px 0px #00000017;
 	height: 50px;
 }
+
+#cat {
+	font-size: 14px;
+    display: flex;
+    padding-left: 5px;
+    font-family: sans-serif;
+}
