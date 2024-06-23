@@ -1,8 +1,12 @@
-const travaux = document.querySelector(".gallery")
+const galerieProjets = document.querySelector(".gallery")
 const filtres = document.querySelector(".filtres")
 const apiUrl = "http://localhost:5678/api/works"
 const apiCategories = "http://localhost:5678/api/categories"
+const recup = await fetch(apiUrl)
+const articles = await recup.json()
 
+console.log(articles)
+/*
 fetch(apiUrl)
   .then((response) => response.json())
   .then(function (data) {
@@ -11,7 +15,7 @@ fetch(apiUrl)
   .catch(function (error) {
     console.log(error)
   })
-
+*/
 fetch(apiCategories)
   .then((response) => response.json())
   .then(function (data) {
@@ -22,7 +26,7 @@ fetch(apiCategories)
   })
 
 
-function genererImg(articles) {
+function genererImg() {
   for (let i = 0; i < articles.length; i++) {
 
     const article = document.createElement("article")
@@ -36,11 +40,13 @@ function genererImg(articles) {
     const nomArticle = document.createElement("p")
     nomArticle.innerText = articles[i].title
 
-    travaux.appendChild(article)
+    galerieProjets.appendChild(article)
     article.appendChild(imgArticle)
     article.appendChild(nomArticle)
   }
 }
+
+genererImg()
 
 function generateFilters(categories) {
   categories.forEach(category => {
@@ -91,12 +97,8 @@ const btnLogout = document.querySelector(".btnLogout")
 const modeEdition = document.querySelector(".modeEdition")
 const modifier = document.querySelector(".modifier")
 
-const reponse = await fetch("http://localhost:5678/api/works");
-const articles = await reponse.json();
 
-function homepageEdit(){
   if(userToken !== null){
-    initAddEventListenerModale()
 filtres.style.display = "none"
 btnLogin.innerText = "logout"
 
@@ -105,12 +107,6 @@ btnLogin.addEventListener("click", ()=>{
   window.location.href = "index.html"
 })
 
-modifier.addEventListener("click", ()=>{
-  afficherModale()
-  })
-  utilisationModale(articles)
-
-
   }
   else {
     btnLogin.innerText = "login"
@@ -118,34 +114,32 @@ modifier.addEventListener("click", ()=>{
     modifier.style.display = "none"
     console.log("no token")
   }
-}
-homepageEdit()
 
 
 
 
 // GESTION DE LA MODALE
+const modale = document.querySelector(".fenetremodale")
+let fermerModale = document.getElementById("close")
+
 
 const ajout = document.querySelector(".ajout")
 ajout.style.display = "none"
+const btnAjoutModale = document.querySelector(".btnmodale")
+
+  
 
 
 function afficherModale() {
-  let modale = document.querySelector(".fenetremodale")
   
-  modale.classList.add("active")
-
+  modale.style.display = "flex"
+  
 }
 
 function cacherModale() {
-  let modale = document.querySelector(".fenetremodale")
 
-  modale.classList.remove("active")
+  modale.style.display = "none"
 }
-
-function initAddEventListenerModale() {
-  let modale = document.querySelector(".fenetremodale")
-  let fermerModale = document.getElementById("close")
 
 
   modifier.addEventListener("click", () => {
@@ -156,22 +150,32 @@ function initAddEventListenerModale() {
     cacherModale()
   })
 
-  window.addEventListener("click", (e)=>{
-    if(e.target === modale)
-      cacherModale()
-    
-  })
-}
+modale.addEventListener("click", (e)=>{
+  console.log(e.target)
+  if(e.target === modale){
+    cacherModale()
+  }
+  
+})
+
 
 function partieSuppression(){
   const projetsModale = document.querySelector(".projetsmodale")
   const titreModale = document.querySelector(".title")
 
+ajout.style.display = "none"
   titreModale.innerText = "Galerie photo"
+
+  const precedent = document.querySelector(".fa-arrow-left")
+
+  precedent.style.display = "none"
+  btnAjoutModale.innerText = "Ajouter une photo"
+  btnAjoutModale.addEventListener("click", partieAjout)
+
+
 
   for(let i=0; i<articles.length; i++){
 
-  const precedent = document.querySelector(".fa-arrow-left")
   const projet = document.createElement("article");
   const imageProjet = document.createElement("img");
   imageProjet.src = articles[i].imageUrl;
@@ -192,10 +196,11 @@ function partieSuppression(){
     
     })
 
-  precedent.style.display = "none"
 }
 
 }
+
+partieSuppression()
 
 function partieAjout(){
   const projetsModale = document.querySelector(".projetsmodale")
@@ -206,15 +211,20 @@ function partieAjout(){
   projetsModale.innerHTML = ""
   titreModale.innerText = "Ajout photo"
   precedent.style.display = "block"
+  btnAjoutModale.innerText = "Valider"
 projetsModale.appendChild(ajout)
-ajout.style.display = "block"
+ajout.style.display = "flex"
   precedent.addEventListener("click", partieSuppression)
-}
 
-function utilisationModale(articles){
-  partieSuppression(articles)
-  const btnAjoutModale = document.querySelector(".btnmodale")
+  const champTitre = document.getElementById("title")
+  const champCategorie = document.getElementById("cat")
+    
+  if(champTitre.value.length < 1){
+    btnAjoutModale.disabled = true
+  }
+  else {
+    btnAjoutModale.disabled = false
+    console.log("ca marche")
+  }
   
-  btnAjoutModale.addEventListener("click", partieAjout)
-
 }
