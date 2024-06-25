@@ -151,7 +151,6 @@ function cacherModale() {
   })
 
 modale.addEventListener("click", (e)=>{
-  console.log(e.target)
   if(e.target === modale){
     cacherModale()
   }
@@ -208,6 +207,25 @@ function partieAjout(){
   const projetsModale = document.querySelector(".projetsmodale")
   const precedent = document.querySelector(".fa-arrow-left")
   const titreModale = document.querySelector(".title")
+  const iconeImage = document.querySelector(".iconeimage")
+  const conteneurAjout = document.querySelector(".ajoutphoto")
+  const champTitre = document.getElementById("title")
+  const champCategorie = document.getElementById("cat")
+  const inputImg = document.getElementById("images")
+  const previewImg = document.querySelector(".previewimage")
+  const inputFile = document.querySelector(".inputFile")
+  const tailleMax = document.querySelector(".taillemax")
+
+  inputImg.addEventListener("change", (e)=>{
+    previewImg.src = URL.createObjectURL(e.target.files[0])
+    iconeImage.style.display = "none"
+    previewImg.style.display = "flex"
+    inputFile.style.display = "none"
+    tailleMax.style.display = "none"
+    console.log(e.target.files[0])
+  })
+
+
 
 
   projetsModale.innerHTML = ""
@@ -218,12 +236,12 @@ projetsModale.appendChild(ajout)
 ajout.style.display = "flex"
   precedent.addEventListener("click", partieSuppression)
 
-  const champTitre = document.getElementById("title")
-  const champCategorie = document.getElementById("cat")
+  
   
   btnAjoutModale.style.opacity = "0.5"
   btnAjoutModale.disabled = true
 
+  
 
   champTitre.addEventListener("change", ()=>{
 
@@ -231,6 +249,9 @@ ajout.style.display = "flex"
       console.log("yes")
       btnAjoutModale.style.opacity = "1"
       btnAjoutModale.disabled = false
+      btnAjoutModale.addEventListener("click", ()=>{
+        console.log(fichier)
+      })
       
     }
   })

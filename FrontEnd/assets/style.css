@@ -438,7 +438,7 @@ i:hover {
 	height: 100px;
 }
 
-.projetsmodale img {
+.projetsmodale article img {
 	width: 100%;
 	height: 100%;
 }
@@ -500,11 +500,18 @@ background-color: #E8F1F6;
 border-radius: 3px;
 }
 
-.ajoutphoto img {
+.iconeimage {
 	width: 75px;
 	height: 75px;
 	position: relative;
 	top: 20px;
+}
+
+.previewimage{
+	display: none;
+	height: 160px;
+    width: 120px;
+    padding: 5px;
 }
 
 .ajoutphoto p {
