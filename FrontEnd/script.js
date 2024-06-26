@@ -4,8 +4,10 @@ const apiUrl = "http://localhost:5678/api/works"
 const apiCategories = "http://localhost:5678/api/categories"
 const recup = await fetch(apiUrl)
 const articles = await recup.json()
+const categoryz = await fetch(apiCategories)
+const categ = await categoryz.json()
 
-console.log(articles)
+console.log(categ)
 /*
 fetch(apiUrl)
   .then((response) => response.json())
@@ -83,6 +85,11 @@ function filtrage(filtre) {
       });
     });
 }
+
+document.querySelector(".tous").addEventListener("click", ()=>{
+  galerieProjets.innerHTML = ""
+  genererImg()
+})
 // filtre tout qui fait display block avec le remove fade-out sur tout les articles
 
 
@@ -131,13 +138,10 @@ const btnAjoutModale = document.querySelector(".btnmodale")
 
 
 function afficherModale() {
-  
-  modale.style.display = "flex"
-  
+  modale.style.display = "flex" 
 }
 
 function cacherModale() {
-
   modale.style.display = "none"
 }
 
@@ -157,7 +161,7 @@ modale.addEventListener("click", (e)=>{
   
 })
 
-
+// PREMIERE PAGE DE LA MODALE (SUPPRESSION DE PROJETS)
 function partieSuppression(){
   const projetsModale = document.querySelector(".projetsmodale")
   const titreModale = document.querySelector(".title")
@@ -203,6 +207,7 @@ ajout.style.display = "none"
 
 partieSuppression()
 
+// 2eme PAGE DE LA MODALE (AJOUT DE PROJETS)
 function partieAjout(){
   const projetsModale = document.querySelector(".projetsmodale")
   const precedent = document.querySelector(".fa-arrow-left")
@@ -215,6 +220,16 @@ function partieAjout(){
   const previewImg = document.querySelector(".previewimage")
   const inputFile = document.querySelector(".inputFile")
   const tailleMax = document.querySelector(".taillemax")
+  
+  function selectCategorie(){
+for(let i=0; i< categ.length; i++){
+  const options = document.createElement("option")
+  options.innerText = categ[i].name
+  champCategorie.appendChild(options)
+
+}
+  }
+  selectCategorie()
 
   inputImg.addEventListener("change", (e)=>{
     previewImg.src = URL.createObjectURL(e.target.files[0])
@@ -222,11 +237,9 @@ function partieAjout(){
     previewImg.style.display = "flex"
     inputFile.style.display = "none"
     tailleMax.style.display = "none"
-    console.log(e.target.files[0])
+    console.log(inputImg.files[0].name)
   })
-
-
-
+ 
 
   projetsModale.innerHTML = ""
   titreModale.innerText = "Ajout photo"
@@ -235,9 +248,6 @@ function partieAjout(){
 projetsModale.appendChild(ajout)
 ajout.style.display = "flex"
   precedent.addEventListener("click", partieSuppression)
-
-  
-  
   btnAjoutModale.style.opacity = "0.5"
   btnAjoutModale.disabled = true
 
@@ -249,11 +259,21 @@ ajout.style.display = "flex"
       console.log("yes")
       btnAjoutModale.style.opacity = "1"
       btnAjoutModale.disabled = false
-      btnAjoutModale.addEventListener("click", ()=>{
-        console.log(fichier)
+
+      btnAjoutModale.addEventListener("click", (e)=>{
+        e.preventDefault()
+        const propriétésImg = {
+          title : champTitre.value,
+          image : inputImg.files[0].name,
+          Category : champCategorie.value,
+        }
+        console.log(inputImg.files[0].name)
+        fetch(apiUrl, {
+          method: "POST",
+          body: propriétésImg,
+          headers: {"Authorization" : "Bearer " + userToken,  "Content-Type": "application/json"},
+        })
       })
-      
     }
   })
-  
 }

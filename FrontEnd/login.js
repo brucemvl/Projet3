@@ -4,13 +4,12 @@ let msgErreurMail = document.querySelector(".emailerreur")
 let msgErreurMdp = document.querySelector(".mdperreur")
 let formulaire = document.getElementById("formulaireConnexion")
 
-function erreur(champ, msg){
-    if(champ.value.length < 1){
+function erreur(msg){
     let msgErreur = document.createElement("p")
     msg.appendChild(msgErreur)
     
-    msgErreur.innerText = "Veuillez remplir ce champ"
-    }
+    msgErreur.innerText = "Erreur dans l’identifiant ou le mot de passe"
+    
 }
 
 function validerMail(adressemail) {
@@ -43,9 +42,10 @@ formulaire.addEventListener("submit", function(event){
     .then( response => {
         if( response.status === 200) {
             return response.json()
-        } else if( response === 401 ) {
-            return alert("Non autorisé")
-        } else if (response === 404 ) {
+        } else if( response.status === 401 ) {
+          erreur(msgErreurMdp)
+            
+        } else if (response.status === 404 ) {
             return alert("Utilisateur introuvable")
         }
     })
