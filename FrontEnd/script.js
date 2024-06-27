@@ -8,17 +8,6 @@ const categoryz = await fetch(apiCategories)
 const categ = await categoryz.json()
 const tous = document.querySelector(".tous")
 
-console.log(categ)
-/*
-fetch(apiUrl)
-  .then((response) => response.json())
-  .then(function (data) {
-    genererImg(data);
-  })
-  .catch(function (error) {
-    console.log(error)
-  })
-*/
 fetch(apiCategories)
   .then((response) => response.json())
   .then(function (data) {
@@ -64,9 +53,7 @@ function generateFilters(categories) {
     filtres.appendChild(menuFiltreItem)
     filtrage(menuFiltreItem)
   })
- 
-  
-  
+
 }
 
 
@@ -75,30 +62,22 @@ function filtrage(filtre) {
    
 
     filtre.addEventListener("click", function () {
-      const category = filtre.dataset.category;
-
+      const category = filtre.dataset.category
       articles.forEach(article => {
+        article.classList.add("fade-out")
         if( article.dataset.category !== category) {
-          article.style.display = 'none';
-          article.classList.add('fade-out')
-          setTimeout(() => {
-            article.style.display = "none";
-            article.classList.remove("fade-out");
-          }, 500);
+          article.style.display = 'none'
         }
         else {
-          article.style.display = 'block';
-          setTimeout(() => {
-            article.classList.remove("fade-out");
-          }, 0);
+          article.style.display = 'block'
         }
-    
-      });
-     
-    });
+      }) 
+    })
+
     tous.addEventListener("click", ()=>{
       articles.forEach(article =>{
       article.style.display = "block"
+      article.classList.add('fade-out')
         
       })
     })
@@ -143,6 +122,7 @@ btnLogin.addEventListener("click", ()=>{
 // GESTION DE LA MODALE
 const modale = document.querySelector(".fenetremodale")
 let fermerModale = document.getElementById("close")
+const overlay = document.querySelector(".overlay")
 
 
 const ajout = document.querySelector(".ajout")
@@ -169,8 +149,8 @@ function cacherModale() {
     cacherModale()
   })
 
-modale.addEventListener("click", (e)=>{
-  if(e.target === modale){
+overlay.addEventListener("click", (e)=>{
+  if(e.target === overlay){
     cacherModale()
   }
   
@@ -198,7 +178,7 @@ ajout.style.display = "none"
 
   const projet = document.createElement("article");
   const imageProjet = document.createElement("img");
-  imageProjet.src = articles[i].imageUrl;
+  imageProjet.src = articles[i].imageUrl
   const id = articles[i].id
   const suppression = document.createElement("i")
   suppression.classList.add("fa-solid", "fa-trash-can")
