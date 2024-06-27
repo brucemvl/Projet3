@@ -6,6 +6,7 @@ const recup = await fetch(apiUrl)
 const articles = await recup.json()
 const categoryz = await fetch(apiCategories)
 const categ = await categoryz.json()
+const tous = document.querySelector(".tous")
 
 console.log(categ)
 /*
@@ -30,6 +31,7 @@ fetch(apiCategories)
 
 function genererImg() {
   for (let i = 0; i < articles.length; i++) {
+  
 
     const article = document.createElement("article")
     article.classList.add("arti")
@@ -50,6 +52,8 @@ function genererImg() {
 
 genererImg()
 
+
+
 function generateFilters(categories) {
   categories.forEach(category => {
     const menuFiltreItem = document.createElement("li")
@@ -60,10 +64,15 @@ function generateFilters(categories) {
     filtres.appendChild(menuFiltreItem)
     filtrage(menuFiltreItem)
   })
+ 
+  
+  
 }
+
 
 function filtrage(filtre) {
     const articles = document.querySelectorAll('.arti');
+   
 
     filtre.addEventListener("click", function () {
       const category = filtre.dataset.category;
@@ -76,20 +85,26 @@ function filtrage(filtre) {
             article.style.display = "none";
             article.classList.remove("fade-out");
           }, 500);
-        } else {
+        }
+        else {
           article.style.display = 'block';
           setTimeout(() => {
             article.classList.remove("fade-out");
           }, 0);
         }
+    
       });
+     
     });
+    tous.addEventListener("click", ()=>{
+      articles.forEach(article =>{
+      article.style.display = "block"
+        
+      })
+    })
 }
 
-document.querySelector(".tous").addEventListener("click", ()=>{
-  galerieProjets.innerHTML = ""
-  genererImg()
-})
+
 // filtre tout qui fait display block avec le remove fade-out sur tout les articles
 
 

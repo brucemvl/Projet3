@@ -353,7 +353,7 @@ footer nav ul {
 .fade-out {
 	animation: fadeout .5s ease-in-out;
 }
-
+/*
 @keyframes fadeout {
 	0%{
 		opacity: 1;
@@ -362,7 +362,7 @@ footer nav ul {
 		opacity: 0;
 	} 
 }
-
+*/
 .fenetremodale {
     display: none;
     position: absolute;
