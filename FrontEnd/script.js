@@ -187,16 +187,16 @@ ajout.style.display = "none"
     projet.appendChild(suppression)
 
     suppression.addEventListener("click", (e)=>{
-        
+      e.preventDefault()
+
      projet.style.display = "none"
      projets[i].style.display = "none"
 
-     
+     /*
       fetch("http://localhost:5678/api/works/" + id ,{
         method: "DELETE",
         headers: {"Authorization" : "Bearer " + userToken}
-      })
-      e.preventDefault()
+      })*/
     })
 
 }
