@@ -160,6 +160,8 @@ overlay.addEventListener("click", (e)=>{
 function partieSuppression(){
   const projetsModale = document.querySelector(".projetsmodale")
   const titreModale = document.querySelector(".title")
+  const projets = document.querySelectorAll('.arti');
+
 
 ajout.style.display = "none"
   titreModale.innerText = "Galerie photo"
@@ -172,28 +174,29 @@ ajout.style.display = "none"
   btnAjoutModale.disabled = false
   btnAjoutModale.style.opacity = "1"
 
-
-
   for(let i=0; i<articles.length; i++){
+    const projet = document.createElement("article");
+    const imageProjet = document.createElement("img");
+    imageProjet.src = articles[i].imageUrl
+    const id = articles[i].id
+    const suppression = document.createElement("i")
+    suppression.classList.add("fa-solid", "fa-trash-can")
 
-  const projet = document.createElement("article");
-  const imageProjet = document.createElement("img");
-  imageProjet.src = articles[i].imageUrl
-  const id = articles[i].id
-  const suppression = document.createElement("i")
-  suppression.classList.add("fa-solid", "fa-trash-can")
+    projetsModale.appendChild(projet)
+    projet.appendChild(imageProjet)
+    projet.appendChild(suppression)
 
-  projetsModale.appendChild(projet)
-  projet.appendChild(imageProjet)
-  projet.appendChild(suppression)
+    suppression.addEventListener("click", (e)=>{
+        
+     projet.style.display = "none"
+     projets[i].style.display = "none"
 
-  suppression.addEventListener("click", ()=>{
-      
+     
       fetch("http://localhost:5678/api/works/" + id ,{
         method: "DELETE",
         headers: {"Authorization" : "Bearer " + userToken}
       })
-    
+      e.preventDefault()
     })
 
 }
@@ -215,17 +218,30 @@ function partieAjout(){
   const previewImg = document.querySelector(".previewimage")
   const inputFile = document.querySelector(".inputFile")
   const tailleMax = document.querySelector(".taillemax")
+
+  projetsModale.innerHTML = ""
+  titreModale.innerText = "Ajout photo"
+  precedent.style.display = "block"
+  btnAjoutModale.innerText = "Valider"
+  projetsModale.appendChild(ajout)
+  ajout.style.display = "flex"
+  precedent.addEventListener("click", partieSuppression)
+  btnAjoutModale.style.opacity = "0.5"
+  btnAjoutModale.disabled = true
   
+  //menu categorie dynamique
   function selectCategorie(){
 for(let i=0; i< categ.length; i++){
   const options = document.createElement("option")
   options.innerText = categ[i].name
+  options.id = categ[i].id
   champCategorie.appendChild(options)
-
 }
   }
   selectCategorie()
+  
 
+  // Previsualisation de l'image 
   inputImg.addEventListener("change", (e)=>{
     previewImg.src = URL.createObjectURL(e.target.files[0])
     iconeImage.style.display = "none"
@@ -236,39 +252,35 @@ for(let i=0; i< categ.length; i++){
   })
  
 
-  projetsModale.innerHTML = ""
-  titreModale.innerText = "Ajout photo"
-  precedent.style.display = "block"
-  btnAjoutModale.innerText = "Valider"
-projetsModale.appendChild(ajout)
-ajout.style.display = "flex"
-  precedent.addEventListener("click", partieSuppression)
-  btnAjoutModale.style.opacity = "0.5"
-  btnAjoutModale.disabled = true
-
   
-
+//Bouton valider fonctionnel lorsque les champs sont remplis
   champTitre.addEventListener("change", ()=>{
 
     if (champTitre.value.length >= 1){
       console.log("yes")
       btnAjoutModale.style.opacity = "1"
       btnAjoutModale.disabled = false
-
-      btnAjoutModale.addEventListener("click", (e)=>{
-        e.preventDefault()
-        const propriétésImg = {
-          title : champTitre.value,
-          image : inputImg.files[0].name,
-          Category : champCategorie.value,
-        }
-        console.log(inputImg.files[0].name)
-        fetch(apiUrl, {
-          method: "POST",
-          body: propriétésImg,
-          headers: {"Authorization" : "Bearer " + userToken,  "Content-Type": "application/json"},
-        })
-      })
     }
+
+//Ajout de l'image
+const choix = document.querySelector("#cat option:checked")
+    btnAjoutModale.addEventListener("click", (e)=>{
+      e.preventDefault()
+      const propriétésImg = {
+        title : champTitre.value,
+        image : inputImg.files[0].name,
+        category : {
+          id : Number(choix.id),
+          name : champCategorie.value
+        }
+      }
+    
+      
+      fetch(apiUrl, {
+        method: "POST",
+        body: propriétésImg,
+        headers: {"Authorization" : "Bearer " + userToken,  "content-type": "application/json"},
+      })
+    })
   })
 }
