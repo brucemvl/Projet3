@@ -8,6 +8,7 @@ const categoryz = await fetch(apiCategories)
 const categ = await categoryz.json()
 const tous = document.querySelector(".tous")
 
+
 fetch(apiCategories)
   .then((response) => response.json())
   .then(function (data) {
@@ -185,25 +186,62 @@ ajout.style.display = "none"
     projetsModale.appendChild(projet)
     projet.appendChild(imageProjet)
     projet.appendChild(suppression)
+    
 
-    suppression.addEventListener("click", (e)=>{
-      e.preventDefault()
+    function supprimer(){
+      suppression.addEventListener("click", function(event){
+        
+  
+        projet.style.display = "none"
+            projets[i].style.display = "none"
+   
+            fetch("http://localhost:5678/api/works/" + id ,{
+              method: "DELETE",
+              headers: {"Authorization" : "Bearer " + userToken}
+            })
+            event.preventDefault()
+  
+  
+      })
 
-     projet.style.display = "none"
-     projets[i].style.display = "none"
+      
 
-     /*
-      fetch("http://localhost:5678/api/works/" + id ,{
-        method: "DELETE",
-        headers: {"Authorization" : "Bearer " + userToken}
-      })*/
-    })
+      
 
-}
+      // event.preventDefault()
 
-}
+      /* .then(response => {
+         if(response.status === 200){
+          projet.style.display = "none"
+          projets[i].style.display = "none"         }})
+        /* .then(function() {
+            projet.style.display = "none"
+      projets[i].style.display = "none"
+         })*/
+       }
+       supprimer()
+
+   /* suppression.addEventListener("click", function(event){
+      event.preventDefault()
+
+      projet.style.display = "none"
+          projets[i].style.display = "none"
+ 
+          supprimer()
+
+
+
+    })*/
+
+      }
+    }
+
+
+
+
 
 partieSuppression()
+
 
 // 2eme PAGE DE LA MODALE (AJOUT DE PROJETS)
 function partieAjout(){
@@ -218,16 +256,18 @@ function partieAjout(){
   const previewImg = document.querySelector(".previewimage")
   const inputFile = document.querySelector(".inputFile")
   const tailleMax = document.querySelector(".taillemax")
+  const validerAjout = document.querySelector(".btnmoda")
 
   projetsModale.innerHTML = ""
   titreModale.innerText = "Ajout photo"
   precedent.style.display = "block"
-  btnAjoutModale.innerText = "Valider"
   projetsModale.appendChild(ajout)
   ajout.style.display = "flex"
   precedent.addEventListener("click", partieSuppression)
-  btnAjoutModale.style.opacity = "0.5"
-  btnAjoutModale.disabled = true
+  validerAjout.innerText = "Valider"
+  validerAjout.style.opacity = "0.5"
+  validerAjout.disabled = true
+  btnAjoutModale.style.display = "none"
   
   //menu categorie dynamique
   function selectCategorie(){
@@ -248,6 +288,7 @@ for(let i=0; i< categ.length; i++){
     previewImg.style.display = "flex"
     inputFile.style.display = "none"
     tailleMax.style.display = "none"
+    document.querySelector(".champsformulaire").classList.add("down")
     console.log(inputImg.files[0].name)
   })
  
@@ -258,29 +299,34 @@ for(let i=0; i< categ.length; i++){
 
     if (champTitre.value.length >= 1){
       console.log("yes")
-      btnAjoutModale.style.opacity = "1"
-      btnAjoutModale.disabled = false
+      validerAjout.style.opacity = "1"
+      validerAjout.disabled = false
     }
 
 //Ajout de l'image
 const choix = document.querySelector("#cat option:checked")
-    btnAjoutModale.addEventListener("click", (e)=>{
+   /* btnAjoutModale.addEventListener("click", (e)=>{
       e.preventDefault()
       const propriétésImg = {
         title : champTitre.value,
-        image : inputImg.files[0].name,
-        category : {
-          id : Number(choix.id),
-          name : champCategorie.value
-        }
-      }
+        image : inputImg.files[0],
+        category : choix.id
+      }*/
+     document.querySelector(".formulaireAjout").addEventListener("submit", (e)=>{
+e.preventDefault()
+      const propertyImg = new FormData();
+      propertyImg.append("title", champTitre.value,);
+      propertyImg.append("category", choix.id);
+      propertyImg.append("image",  inputImg.files[0]);
     
-      
+      console.log(propertyImg)
       fetch(apiUrl, {
         method: "POST",
-        body: propriétésImg,
-        headers: {"Authorization" : "Bearer " + userToken,  "content-type": "application/json"},
+        body: propertyImg,
+        headers: {"Authorization" : "Bearer " + userToken,  "Accept": "application/json"},
       })
-    })
+      
+    
   })
+})
 }

@@ -78,7 +78,7 @@
 	</footer>
 
 	<div class="fenetremodale">
-		<div class="overlay">
+		<div class="overlay"></div>
         <div class="contenumodale">
 			<div class="iconesmodale">
 				<i class="fa-solid fa-arrow-left"></i>
@@ -92,23 +92,25 @@
 						<div class="ajoutphoto">
 							<img src="assets/icons/picture.png" class="iconeimage">
 							<img class="previewimage" src="">
-
-							<label for="images" class="inputFile">
-								<span>+ Ajout photo</span>
-							<input type="file" id="images">
-							</label>
 							<p class="taillemax">jpg, png : 4mo max</p>
+	
 						</div>
 					<form class="formulaireAjout">
+						<label for="images" class="inputFile">
+							<span>+ Ajout photo</span>
+						<input type="file" id="images">
+						</label>
+						<div class="champsformulaire">
 						<label for="title">Titre</label>
 						<input type="text" name="title" id="title">
 						<label for="cat">Catégorie</label>
 						<select id="cat" name="cat"></select>
+						<input  type="submit" value="Ajouter une photo" class="btnmoda">
+						</div>
 					</form>
 					</div>
 				</div>
 				<button class="btnmodale">Ajouter une photo</button>
-		</div>
 		</div>
     </div>
 </div>
