@@ -170,6 +170,7 @@ ajout.style.display = "none"
   const precedent = document.querySelector(".fa-arrow-left")
 
   precedent.style.display = "none"
+  btnAjoutModale.style.display = "block"
   btnAjoutModale.innerText = "Ajouter une photo"
   btnAjoutModale.addEventListener("click", partieAjout)
   btnAjoutModale.disabled = false
@@ -188,57 +189,22 @@ ajout.style.display = "none"
     projet.appendChild(suppression)
     
 
-    function supprimer(){
-      suppression.addEventListener("click", function(event){
-        
-  
-        projet.style.display = "none"
-            projets[i].style.display = "none"
-   
-            fetch("http://localhost:5678/api/works/" + id ,{
-              method: "DELETE",
-              headers: {"Authorization" : "Bearer " + userToken}
-            })
-            event.preventDefault()
-  
-  
-      })
-
-      
-
-      
-
-      // event.preventDefault()
-
-      /* .then(response => {
-         if(response.status === 200){
-          projet.style.display = "none"
-          projets[i].style.display = "none"         }})
-        /* .then(function() {
-            projet.style.display = "none"
-      projets[i].style.display = "none"
-         })*/
-       }
-       supprimer()
-
-   /* suppression.addEventListener("click", function(event){
-      event.preventDefault()
-
+    function supprimer(e){
+      e.preventDefault()
       projet.style.display = "none"
-          projets[i].style.display = "none"
- 
-          supprimer()
+            projets[i].style.display = "none"
 
+      fetch("http://localhost:5678/api/works/" + id ,{
+        method: "DELETE",
+        headers: {"Authorization" : "Bearer " + userToken}
+      })
+    }
+      suppression.addEventListener("click", supprimer)
+       
 
-
-    })*/
 
       }
     }
-
-
-
-
 
 partieSuppression()
 
@@ -305,28 +271,28 @@ for(let i=0; i< categ.length; i++){
 
 //Ajout de l'image
 const choix = document.querySelector("#cat option:checked")
-   /* btnAjoutModale.addEventListener("click", (e)=>{
-      e.preventDefault()
-      const propriétésImg = {
-        title : champTitre.value,
-        image : inputImg.files[0],
-        category : choix.id
-      }*/
+  
      document.querySelector(".formulaireAjout").addEventListener("submit", (e)=>{
-e.preventDefault()
-      const propertyImg = new FormData();
-      propertyImg.append("title", champTitre.value,);
-      propertyImg.append("category", choix.id);
-      propertyImg.append("image",  inputImg.files[0]);
+      e.preventDefault()
+      const propertyImg = new FormData()
+      propertyImg.append("title", champTitre.value,)
+      propertyImg.append("category", choix.id)
+      propertyImg.append("image",  inputImg.files[0])
     
-      console.log(propertyImg)
       fetch(apiUrl, {
         method: "POST",
         body: propertyImg,
         headers: {"Authorization" : "Bearer " + userToken,  "Accept": "application/json"},
+      })
+      .then(response =>{
+        if(response.status != 201){
+          alert("erreur lors de l'ajout de l'image")
+        }
       })
       
     
   })
 })
 }
+
+
