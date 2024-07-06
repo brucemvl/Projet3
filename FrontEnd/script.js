@@ -124,7 +124,8 @@ btnLogin.addEventListener("click", ()=>{
 const modale = document.querySelector(".fenetremodale")
 let fermerModale = document.getElementById("close")
 const overlay = document.querySelector(".overlay")
-
+const projetsModale = document.querySelector(".projetsmodale")
+const contenu = document.querySelector(".contenumodale")
 
 const ajout = document.querySelector(".ajout")
 ajout.style.display = "none"
@@ -158,23 +159,10 @@ overlay.addEventListener("click", (e)=>{
 })
 
 // PREMIERE PAGE DE LA MODALE (SUPPRESSION DE PROJETS)
-function partieSuppression(){
-  const projetsModale = document.querySelector(".projetsmodale")
-  const titreModale = document.querySelector(".title")
+function genererImgModale(){
   const projets = document.querySelectorAll('.arti');
+  const projetsModale = document.querySelector(".projetsmodale")
 
-
-ajout.style.display = "none"
-  titreModale.innerText = "Galerie photo"
-
-  const precedent = document.querySelector(".fa-arrow-left")
-
-  precedent.style.display = "none"
-  btnAjoutModale.style.display = "block"
-  btnAjoutModale.innerText = "Ajouter une photo"
-  btnAjoutModale.addEventListener("click", partieAjout)
-  btnAjoutModale.disabled = false
-  btnAjoutModale.style.opacity = "1"
 
   for(let i=0; i<articles.length; i++){
     const projet = document.createElement("article");
@@ -187,7 +175,6 @@ ajout.style.display = "none"
     projetsModale.appendChild(projet)
     projet.appendChild(imageProjet)
     projet.appendChild(suppression)
-    
 
     function supprimer(e){
       e.preventDefault()
@@ -199,13 +186,34 @@ ajout.style.display = "none"
         headers: {"Authorization" : "Bearer " + userToken}
       })
     }
-      suppression.addEventListener("click", supprimer)
-       
+    suppression.addEventListener("click", supprimer)
 
+}
+}
+genererImgModale()
+
+
+function partieSuppression(){
+  const titreModale = document.querySelector(".js-title")
+
+  ajout.style.display = "none"
+  titreModale.innerText = "Galerie photo"
+
+  const precedent = document.querySelector(".fa-arrow-left")
+
+  precedent.style.display = "none"
+  btnAjoutModale.style.display = "block"
+  btnAjoutModale.innerText = "Ajouter une photo"
+  btnAjoutModale.addEventListener("click", ()=>{
+    contenu.classList.add("partieAjout")
+    partieAjout()
+
+  })
+  btnAjoutModale.disabled = false
+  btnAjoutModale.style.opacity = "1"
 
       }
-    }
-
+    
 partieSuppression()
 
 
@@ -213,7 +221,7 @@ partieSuppression()
 function partieAjout(){
   const projetsModale = document.querySelector(".projetsmodale")
   const precedent = document.querySelector(".fa-arrow-left")
-  const titreModale = document.querySelector(".title")
+  const titreModale = document.querySelector(".js-title")
   const iconeImage = document.querySelector(".iconeimage")
   const conteneurAjout = document.querySelector(".ajoutphoto")
   const champTitre = document.getElementById("title")
@@ -225,11 +233,21 @@ function partieAjout(){
   const validerAjout = document.querySelector(".btnmoda")
 
   projetsModale.innerHTML = ""
+  projetsModale.style.display = "flex"
   titreModale.innerText = "Ajout photo"
   precedent.style.display = "block"
   projetsModale.appendChild(ajout)
   ajout.style.display = "flex"
-  precedent.addEventListener("click", partieSuppression)
+  precedent.addEventListener("click", ()=>{
+    projetsModale.style.display = "grid"
+    contenu.classList.remove("partieAjout")
+    partieSuppression()
+    projetsModale.innerHTML = ""
+    genererImgModale()
+
+    
+
+  })
   validerAjout.innerText = "Valider"
   validerAjout.style.opacity = "0.5"
   validerAjout.disabled = true
@@ -288,8 +306,7 @@ const choix = document.querySelector("#cat option:checked")
         if(response.status != 201){
           alert("erreur lors de l'ajout de l'image")
         }
-      })
-      
+      })   
     
   })
 })

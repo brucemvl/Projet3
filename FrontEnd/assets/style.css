@@ -3,19 +3,87 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -25,12 +93,18 @@ time, mark, audio, video {
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
 	display: block;
-}
-html {
-	max-width: 1440px;
 }
 
 body {
@@ -38,16 +112,20 @@ body {
 	background-color: #FFFEF8;
 }
 
-ol, ul {
+ol,
+ul {
 	list-style: none;
 }
 
-blockquote, q {
+blockquote,
+q {
 	quotes: none;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
 	content: '';
 	content: none;
 }
@@ -59,23 +137,23 @@ table {
 
 /** end reset css**/
 body {
-	
-	font-family: 'Work Sans' ;
+	font-family: 'Work Sans';
 	font-size: 14px;
 }
+
 .blocpage {
 	max-width: 1140px;
-	margin:auto;
+	margin: auto;
 }
 
 .modeEdition {
 	height: 30px;
-    width: 1440px;
-    display: flex;
-    justify-content: center;
-    background-color: black;
-    color: white;
-    align-items: center;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	background-color: black;
+	color: white;
+	align-items: center;
 	gap: 10px;
 }
 
@@ -88,6 +166,7 @@ header {
 a {
 	text-decoration: none;
 	color: black;
+
 	&&:hover {
 		color: #1D6154;
 	}
@@ -97,7 +176,7 @@ section {
 	margin: 50px 0
 }
 
-h1{
+h1 {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -106,23 +185,24 @@ h1{
 	color: #B1663C
 }
 
-h1 > span {
+h1>span {
 	font-family: 'Work Sans';
-	font-size:10px;
+	font-size: 10px;
 	letter-spacing: 0.1em;
-;
+	;
 }
 
-h2{
+h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154;
 }
+
 .titreprojets span {
 	font-size: 12px;
 	position: relative;
-    left: 20px;	
+	left: 20px;
 }
 
 span:hover {
@@ -135,6 +215,7 @@ nav ul {
 	list-style-type: none;
 
 }
+
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
@@ -144,7 +225,8 @@ li:hover {
 	color: #B1663C;
 	cursor: pointer;
 }
-.logout{
+
+.logout {
 	display: none;
 }
 
@@ -152,9 +234,11 @@ li:hover {
 	display: flex;
 	align-items: center;
 }
+
 #introduction figure {
 	flex: 1
 }
+
 #introduction img {
 	display: block;
 	margin: auto;
@@ -164,6 +248,7 @@ li:hover {
 #introduction article {
 	flex: 1
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
@@ -180,12 +265,12 @@ li:hover {
 
 .filtres {
 	display: grid;
-	grid-template-columns:100px 100px 160px 200px ;
+	grid-template-columns: 100px 100px 160px 200px;
 	gap: 20px;
 }
 
 .filtres li {
-	
+
 	border: 1px solid #1D6154;
 	border-radius: 60px 60px;
 	font-size: 16px;
@@ -194,9 +279,10 @@ li:hover {
 	height: 35px;
 	display: flex;
 	justify-content: center;
-	align-items: center; 
+	align-items: center;
 	font-family: "syne";
-	&&:hover{
+
+	&&:hover {
 		background-color: #1D6154;
 		color: white;
 		cursor: pointer;
@@ -231,21 +317,24 @@ li:hover {
 .gallery img {
 	width: 100%;
 }
+
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 
-#contact > * {
+#contact>* {
 	text-align: center;
 
 }
-#contact h2{
+
+#contact h2 {
 	margin-bottom: 20px;
 }
+
 #contact form {
 	text-align: left;
-	margin-top:30px;
+	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
 }
@@ -256,9 +345,11 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
 	margin: 2em 0 1em 0;
 }
+
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
@@ -266,18 +357,21 @@ margin: auto;
 
 #login {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
-#login > * {
+
+#login>* {
 	text-align: center;
 
 }
-#login h2{
+
+#login h2 {
 	margin-bottom: 20px;
 }
+
 #login form {
 	text-align: left;
-	margin-top:30px;
+	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
 }
@@ -288,32 +382,37 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #login label {
 	margin: 2em 0 1em 0;
 }
+
 #login textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin: 2em auto;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
 	transition-duration: 500ms;
+
 	&&:hover {
 		background-color: #B1663C;
 		cursor: pointer;
 	}
 }
+
 .connexion {
 	transition-duration: 500ms;
 }
+
 .connexion:hover {
 	cursor: pointer;
 	background-color: #B1663C;
@@ -325,18 +424,18 @@ input[type="submit"]{
 
 .emailerreur {
 	display: flex;
-    justify-content: center;
-    margin: 10px;
-    color: red;
-    font-weight: 900;
+	justify-content: center;
+	margin: 10px;
+	color: red;
+	font-weight: 900;
 }
 
 .mdperreur {
 	display: flex;
-    justify-content: center;
-    margin: 10px;
-    color: red;
-    font-weight: 900;
+	justify-content: center;
+	margin: 10px;
+	color: red;
+	font-weight: 900;
 }
 
 footer nav ul {
@@ -348,62 +447,64 @@ footer nav ul {
 .arti {
 	opacity: 1;
 	transition: opacity 1s ease;
-} 
+}
 
 .fade-out {
 	animation: fadeout 1s ease-in-out;
 }
 
 @keyframes fadeout {
-	0%{
+	0% {
 		opacity: 0;
 	}
+
 	100% {
 		opacity: 1;
-	} 
+	}
 }
 
 .fenetremodale {
-    display: none;
-    position: absolute;
-	top: 300px;
-    height: 100%;
-    width: 1140px;
+	display: none;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 100%;
+	width: 100%;
 	justify-content: center;
-	align-items: center;	
+	align-items: center;
 }
+
 .overlay {
 	height: 2500px;
-    width: 1440px;
-    display: flex;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0.5);
-    align-items: center;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.5);
+	align-items: center;
 	position: absolute;
 }
 
 .contenumodale {
 	width: 630px;
-    height: 680px;
 	display: flex;
 	flex-direction: column;
 	position: relative;
 	background-color: #FFFFFF;
 	border-radius: 10px;
 	flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 20px;
-    text-align: center;
-    color: white;
-    font-size: 17px;
-    font-weight: 500;
-    align-content: center;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 20px;
+	text-align: center;
+	color: white;
+	font-size: 17px;
+	font-weight: 500;
+	align-content: center;
 }
 
 #close {
 	color: black;
-    display: flex;
+	display: flex;
 	position: relative;
 	left: 280px;
 }
@@ -419,10 +520,9 @@ i:hover {
 
 .titremodale {
 	display: flex;
-    height: 200px;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
+	justify-content: center;
+	align-items: center;
+	margin: 3rem 0;
 }
 
 .iconesmodale {
@@ -432,13 +532,12 @@ i:hover {
 
 .projetsmodale {
 	border-bottom: solid 1px #B3B3B3;
-    width: 400px;
-    height: 350px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
+	display: grid;
 	margin-bottom: 30px;
 	padding-bottom: 50px;
+	grid-template-columns: repeat(5, 1fr);
+	grid-column-gap: 10px;
+	grid-row-gap: 30px;
 }
 
 .projetsmodale article {
@@ -453,11 +552,11 @@ i:hover {
 
 .projetsmodale i {
 	background-color: black;
-    border: 2px solid black;
-    border-radius: 2px;
-    position: relative;
-    left: 25px;
-    bottom: 100px;
+	border: 2px solid black;
+	border-radius: 2px;
+	position: relative;
+	left: 25px;
+	bottom: 100px;
 }
 
 .contenumodale button {
@@ -465,20 +564,20 @@ i:hover {
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
+	margin: 2em auto;
+	padding: 0.5em 1em;
 	text-align: center;
 	border-radius: 60px;
-	height: 35px;
 	transition-duration: 400ms;
+	border: none;
 }
 
 .suppression {
 	border: solid 1px black;
-    color: black;
-    background-color: black;
-    height: 10px;
-    width: 10px;
+	color: black;
+	background-color: black;
+	height: 10px;
+	width: 10px;
 }
 
 button:hover {
@@ -488,8 +587,15 @@ button:hover {
 
 .fa-arrow-left {
 	color: black;
-    position: relative;
-    right: 270px;
+	position: relative;
+	right: 270px;
+}
+.partieAjout {
+	position: relative;
+    top: 20px;
+	flex-wrap: nowrap; 
+	height: 720px;
+
 }
 
 .ajout {
@@ -517,11 +623,11 @@ button:hover {
 	top: 20px;
 }
 
-.previewimage{
+.previewimage {
 	display: none;
 	height: 160px;
-    width: 120px;
-    padding: 5px;
+	width: 120px;
+	padding: 5px;
 }
 
 .ajoutphoto p {
@@ -539,11 +645,11 @@ button:hover {
 }
 
 .contenumodale form {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 	gap: 15px;
 	margin-top: 20px;
-	
+
 }
 
 .contenumodale label {
@@ -553,7 +659,9 @@ button:hover {
 	font-size: 14px;
 	color: #3D3D3D;
 }
-.champsformulaire input, .champsformulaire select {
+
+.champsformulaire input,
+.champsformulaire select {
 	border: 0;
 	box-shadow: 0px 4px 14px 0px #00000017;
 	height: 50px;
@@ -561,9 +669,9 @@ button:hover {
 
 #cat {
 	font-size: 14px;
-    display: flex;
-    padding-left: 5px;
-    font-family: sans-serif;
+	display: flex;
+	padding-left: 5px;
+	font-family: sans-serif;
 }
 
 input[type=file] {
@@ -572,18 +680,18 @@ input[type=file] {
 
 label span {
 	font-family: 'Syne';
-    font-weight: 700;
-    color: #306685;
-    background-color: #CBD6DC;
-    margin: 2em auto;
-    width: 180px;
-    text-align: center;
-    border-radius: 60px;
-    height: 35px;
-    transition-duration: 500ms;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	font-weight: 700;
+	color: #306685;
+	background-color: #CBD6DC;
+	margin: 2em auto;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px;
+	height: 35px;
+	transition-duration: 500ms;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	transition-duration: 400ms;
 }
 
@@ -593,13 +701,13 @@ label span:hover {
 }
 
 .inputFile {
-    position: relative;
-    bottom: 250px;
+	position: relative;
+	bottom: 250px;
 }
 
 .champsformulaire {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 	position: relative;
 	bottom: 220px;
 	gap: 15px;
