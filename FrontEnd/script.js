@@ -233,6 +233,7 @@ function partieAjout(){
   const validerAjout = document.querySelector(".btnmoda")
 
   projetsModale.innerHTML = ""
+  projetsModale.style.border = "none"
   projetsModale.style.display = "flex"
   titreModale.innerText = "Ajout photo"
   precedent.style.display = "block"
@@ -248,8 +249,7 @@ function partieAjout(){
     
 
   })
-  validerAjout.innerText = "Valider"
-  validerAjout.style.opacity = "0.5"
+  validerAjout.style.opacity = "0.6"
   validerAjout.disabled = true
   btnAjoutModale.style.display = "none"
   

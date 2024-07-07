@@ -392,7 +392,7 @@ li:hover {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"] {
+.formcontact input[type="submit"], #formulaireConnexion input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -401,7 +401,7 @@ input[type="submit"] {
 	width: 180px;
 	text-align: center;
 	border-radius: 60px;
-	transition-duration: 500ms;
+	transition-duration: 400ms;
 
 	&&:hover {
 		background-color: #B1663C;
@@ -570,6 +570,8 @@ i:hover {
 	border-radius: 60px;
 	transition-duration: 400ms;
 	border: none;
+	height: 35px;
+	width: 235px;
 }
 
 .suppression {
@@ -637,13 +639,6 @@ button:hover {
 	bottom: 20px;
 }
 
-.ajoutphoto button {
-	background-color: #CBD6DC;
-	color: #306685;
-	border: 0;
-	transition-duration: 400ms;
-}
-
 .contenumodale form {
 	display: flex;
 	flex-direction: column;
@@ -660,7 +655,7 @@ button:hover {
 	color: #3D3D3D;
 }
 
-.champsformulaire input,
+#title,
 .champsformulaire select {
 	border: 0;
 	box-shadow: 0px 4px 14px 0px #00000017;
@@ -711,6 +706,32 @@ label span:hover {
 	position: relative;
 	bottom: 220px;
 	gap: 15px;
+}
+
+.btnmoda {
+	background-color: #1D6154;
+    height: 35px;
+    width: 235px;
+    color: white;
+    border-radius: 60px;
+    font-weight: 700;
+    font-size: 14px;
+    font-family: syne;
+	border: 0;
+	margin-top: 35px;
+	transition-duration: 400ms;
+	
+}
+
+.btnmoda:hover {
+	background-color: #B1663C;
+	cursor: pointer;
+}
+
+.submitform {
+	border-top: 1px solid #B3B3B3;
+	margin-top: 25px;
+
 }
 
 .down {
