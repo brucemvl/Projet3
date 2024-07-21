@@ -475,7 +475,7 @@ footer nav ul {
 }
 
 .overlay {
-	height: 2500px;
+	height: 6500px;
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -530,7 +530,7 @@ i:hover {
 	margin-top: 15px;
 }
 
-.projetsmodale {
+.sup {
 	border-bottom: solid 1px #B3B3B3;
 	display: grid;
 	margin-bottom: 30px;
@@ -540,17 +540,17 @@ i:hover {
 	grid-row-gap: 30px;
 }
 
-.projetsmodale article {
+.sup article {
 	width: 75px;
 	height: 100px;
 }
 
-.projetsmodale article img {
+.sup article img {
 	width: 100%;
 	height: 100%;
 }
 
-.projetsmodale i {
+.sup i {
 	background-color: black;
 	border: 2px solid black;
 	border-radius: 2px;

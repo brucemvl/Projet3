@@ -1,18 +1,34 @@
 const galerieProjets = document.querySelector(".gallery")
 const filtres = document.querySelector(".filtres")
-const apiUrl = "http://localhost:5678/api/works"
-const apiCategories = "http://localhost:5678/api/categories"
-const recup = await fetch(apiUrl)
+const API = {
+  works : "http://localhost:5678/api/works",
+  categories : "http://localhost:5678/api/categories"
+}
+const recup = await fetch(API.works)
 const articles = await recup.json()
-const categoryz = await fetch(apiCategories)
-const categ = await categoryz.json()
+const categorys = await fetch(API.categories)
+const categ = await categorys.json()
 const tous = document.querySelector(".tous")
 
+const DOM = {
+  btnLogin: document.querySelector(".btnLogin"),
+  btnLogout: document.querySelector(".btnLogout"),
+  modeEdition: document.querySelector(".modeEdition"),
+  modifier: document.querySelector(".modifier"),
+  modale: document.querySelector(".fenetremodale"),
+  overlay: document.querySelector(".overlay"),
+  fermerModale: document.getElementById("close"),
+  projetsModale: document.querySelector(".projetsmodale"),
+  contenu: document.querySelector(".contenumodale"),
+  ajout: document.querySelector(".ajout"),
+  btnAjoutModale: document.querySelector(".btnmodale"),
+  sup: document.querySelector(".sup")
+}
 
-fetch(apiCategories)
+fetch(API.categories)
   .then((response) => response.json())
   .then(function (data) {
-    generateFilters(data)
+    genererFiltres(data)
   })
   .catch(function (error) {
     console.log(error)
@@ -42,9 +58,9 @@ function genererImg() {
 
 genererImg()
 
+// GENERER LES FILTRES
 
-
-function generateFilters(categories) {
+function genererFiltres(categories) {
   categories.forEach(category => {
     const menuFiltreItem = document.createElement("li")
     menuFiltreItem.innerText = category.name
@@ -57,7 +73,7 @@ function generateFilters(categories) {
 
 }
 
-
+// FONCTION DE FILTRAGE DES PROJETS PAR CATEGORIE
 function filtrage(filtre) {
     const articles = document.querySelectorAll('.arti');
    
@@ -85,94 +101,74 @@ function filtrage(filtre) {
 }
 
 
-// filtre tout qui fait display block avec le remove fade-out sur tout les articles
-
-
 // PARTIE ADMINISTRATEUR
 
 const userToken = window.localStorage.getItem("token")
 console.log(userToken)
 
-const menu = document.querySelector(".menu")
-const btnLogin = document.querySelector(".btnLogin")
-const btnLogout = document.querySelector(".btnLogout")
-const modeEdition = document.querySelector(".modeEdition")
-const modifier = document.querySelector(".modifier")
-
 
   if(userToken !== null){
 filtres.style.display = "none"
-btnLogin.innerText = "logout"
+DOM.btnLogin.innerText = "logout"
 
-btnLogin.addEventListener("click", ()=>{
+DOM.btnLogin.addEventListener("click", ()=>{
   window.localStorage.removeItem("token")
   window.location.href = "index.html"
 })
 
   }
   else {
-    btnLogin.innerText = "login"
-    modeEdition.style.display = "none"
-    modifier.style.display = "none"
+    DOM.btnLogin.innerText = "login"
+    DOM.modeEdition.style.display = "none"
+    DOM.modifier.style.display = "none"
     console.log("no token")
   }
 
 
-
-
 // GESTION DE LA MODALE
-const modale = document.querySelector(".fenetremodale")
-let fermerModale = document.getElementById("close")
-const overlay = document.querySelector(".overlay")
-const projetsModale = document.querySelector(".projetsmodale")
-const contenu = document.querySelector(".contenumodale")
 
-const ajout = document.querySelector(".ajout")
-ajout.style.display = "none"
-const btnAjoutModale = document.querySelector(".btnmodale")
-
-  
-
+DOM.ajout.style.display = "none"
 
 function afficherModale() {
-  modale.style.display = "flex" 
+  DOM.modale.style.display = "flex" 
 }
 
 function cacherModale() {
-  modale.style.display = "none"
+  DOM.modale.style.display = "none"
 }
 
-
-  modifier.addEventListener("click", () => {
+DOM.modifier.addEventListener("click", () => {
       afficherModale()
   })
 
-  fermerModale.addEventListener("click", ()=>{
+DOM.fermerModale.addEventListener("click", ()=>{
     cacherModale()
   })
 
-overlay.addEventListener("click", (e)=>{
-  if(e.target === overlay){
+DOM.overlay.addEventListener("click", (e)=>{
+  if(e.target === DOM.overlay){
     cacherModale()
   }
   
 })
 
 // PREMIERE PAGE DE LA MODALE (SUPPRESSION DE PROJETS)
+DOM.sup.style.display = "grid"
+    const projets = document.querySelectorAll('.arti');
+
 function genererImgModale(){
-  const projets = document.querySelectorAll('.arti');
-  const projetsModale = document.querySelector(".projetsmodale")
 
 
   for(let i=0; i<articles.length; i++){
-    const projet = document.createElement("article");
-    const imageProjet = document.createElement("img");
+    const projet = document.createElement("article")
+    const imageProjet = document.createElement("img")
+    
     imageProjet.src = articles[i].imageUrl
     const id = articles[i].id
     const suppression = document.createElement("i")
     suppression.classList.add("fa-solid", "fa-trash-can")
 
-    projetsModale.appendChild(projet)
+    DOM.sup.appendChild(projet)
     projet.appendChild(imageProjet)
     projet.appendChild(suppression)
 
@@ -196,21 +192,22 @@ genererImgModale()
 function partieSuppression(){
   const titreModale = document.querySelector(".js-title")
 
-  ajout.style.display = "none"
+  DOM.ajout.style.display = "none"
   titreModale.innerText = "Galerie photo"
 
   const precedent = document.querySelector(".fa-arrow-left")
 
   precedent.style.display = "none"
-  btnAjoutModale.style.display = "block"
-  btnAjoutModale.innerText = "Ajouter une photo"
-  btnAjoutModale.addEventListener("click", ()=>{
-    contenu.classList.add("partieAjout")
+  DOM.btnAjoutModale.style.display = "block"
+  DOM.btnAjoutModale.innerText = "Ajouter une photo"
+  DOM.btnAjoutModale.addEventListener("click", ()=>{
+    DOM.sup.style.display = "none"
+  DOM.contenu.classList.add("partieAjout")
     partieAjout()
 
   })
-  btnAjoutModale.disabled = false
-  btnAjoutModale.style.opacity = "1"
+  DOM.btnAjoutModale.disabled = false
+  DOM.btnAjoutModale.style.opacity = "1"
 
       }
     
@@ -219,11 +216,9 @@ partieSuppression()
 
 // 2eme PAGE DE LA MODALE (AJOUT DE PROJETS)
 function partieAjout(){
-  const projetsModale = document.querySelector(".projetsmodale")
   const precedent = document.querySelector(".fa-arrow-left")
   const titreModale = document.querySelector(".js-title")
   const iconeImage = document.querySelector(".iconeimage")
-  const conteneurAjout = document.querySelector(".ajoutphoto")
   const champTitre = document.getElementById("title")
   const champCategorie = document.getElementById("cat")
   const inputImg = document.getElementById("images")
@@ -232,26 +227,24 @@ function partieAjout(){
   const tailleMax = document.querySelector(".taillemax")
   const validerAjout = document.querySelector(".btnmoda")
 
-  projetsModale.innerHTML = ""
-  projetsModale.style.border = "none"
-  projetsModale.style.display = "flex"
+  DOM.projetsModale.style.border = "none"
   titreModale.innerText = "Ajout photo"
   precedent.style.display = "block"
-  projetsModale.appendChild(ajout)
-  ajout.style.display = "flex"
+  DOM.projetsModale.appendChild(DOM.ajout)
+  DOM.ajout.style.display = "flex"
   precedent.addEventListener("click", ()=>{
-    projetsModale.style.display = "grid"
-    contenu.classList.remove("partieAjout")
+  DOM.sup.style.display = "grid"
+  DOM.contenu.classList.remove("partieAjout")
     partieSuppression()
-    projetsModale.innerHTML = ""
-    genererImgModale()
-
     
-
+ 
   })
+  champCategorie.innerHTML = ""
+  selectCategorie()
+
   validerAjout.style.opacity = "0.6"
   validerAjout.disabled = true
-  btnAjoutModale.style.display = "none"
+  DOM.btnAjoutModale.style.display = "none"
   
   //menu categorie dynamique
   function selectCategorie(){
@@ -262,9 +255,8 @@ for(let i=0; i< categ.length; i++){
   champCategorie.appendChild(options)
 }
   }
-  selectCategorie()
   
-
+  
   // Previsualisation de l'image 
   inputImg.addEventListener("change", (e)=>{
     previewImg.src = URL.createObjectURL(e.target.files[0])
@@ -289,27 +281,56 @@ for(let i=0; i< categ.length; i++){
 
 //Ajout de l'image
 const choix = document.querySelector("#cat option:checked")
-  
-     document.querySelector(".formulaireAjout").addEventListener("submit", (e)=>{
-      e.preventDefault()
-      const propertyImg = new FormData()
-      propertyImg.append("title", champTitre.value,)
-      propertyImg.append("category", choix.id)
-      propertyImg.append("image",  inputImg.files[0])
-    
-      fetch(apiUrl, {
-        method: "POST",
-        body: propertyImg,
-        headers: {"Authorization" : "Bearer " + userToken,  "Accept": "application/json"},
-      })
-      .then(response =>{
-        if(response.status != 201){
-          alert("erreur lors de l'ajout de l'image")
-        }
-      })   
-    
+
+function ajouterProjet(e){
+  e.preventDefault()
+  const propertyImg = new FormData()
+  propertyImg.append("title", champTitre.value,)
+  propertyImg.append("category", choix.id)
+  propertyImg.append("image",  inputImg.files[0])
+
+
+    function ajoutProjetModale(){
+      const newProjet = document.createElement("article")
+      const newImg = document.createElement("img")
+      newImg.src = URL.createObjectURL(inputImg.files[0])
+      const suppression = document.createElement("i")
+      suppression.classList.add("fa-solid", "fa-trash-can")
+      
+      DOM.sup.appendChild(newProjet)
+      newProjet.appendChild(newImg)
+      newProjet.appendChild(suppression)
+    }
+
+    function ajoutProjetGalerie(){
+      const newarticle = document.createElement("article")
+  const imageAjoutee = document.createElement("img")
+  imageAjoutee.src = URL.createObjectURL(inputImg.files[0])
+  const newtitle = document.createElement("p")
+  newtitle.innerText = champTitre.value
+
+      galerieProjets.appendChild(newarticle)
+      newarticle.appendChild(imageAjoutee)
+      newarticle.appendChild(newtitle)
+    }
+
+  fetch(API.works, {
+    method: "POST",
+    body: propertyImg,
+    headers: {"Authorization" : "Bearer " + userToken,  "Accept": "application/json"},
   })
+  .then(response =>{
+    if(response.status != 201){
+      alert("erreur lors de l'ajout de l'image")
+    }
+    else {
+      
+      ajoutProjetGalerie()
+      ajoutProjetModale() 
+      
+    }
+  })   
+}
+     document.querySelector(".formulaireAjout").addEventListener("submit", ajouterProjet)
 })
 }
-
-
